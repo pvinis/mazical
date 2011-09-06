@@ -7,6 +7,7 @@ class GameWindow < Gosu::Window
   def initialize
     super(960,640,false)
     self.caption = "Mazical"
+    @window = self
 ###    @grid = Grid.new
   @player = Ball.new(self, 20, 50)
   @level

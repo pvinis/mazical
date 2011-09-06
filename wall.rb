@@ -1,11 +1,10 @@
 require 'gosu'
 
 class Wall
-  def initialize(window, visibility, position)
-    @window = window
+  def initialize(visibility, position)
     @v,@p = visibility,position
     @hit = false
-    @image = Gosu::Image.new(@window, "images/" + case @p
+    @image = Gosu::Image.new($window, "images/" + case @p
       when Position::LEFT
         "left"
       when Position::RIGHT

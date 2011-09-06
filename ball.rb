@@ -3,10 +3,9 @@ require './tile'
 class Ball
   TILESIZE = Tile::SIZE
 
-  def initialize(window, x, y)
-    @window = window
+  def initialize(x, y)
     @x,@y = x,y
-    @image = Gosu::Image.new(@window, "images/ball.png")
+    @image = Gosu::Image.new($window, "images/ball.png")
   end
   
   # (0,0) is top left
