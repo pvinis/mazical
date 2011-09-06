@@ -1,25 +1,29 @@
 # Mazical
 
 require 'gosu'
+require './grid'
 require './ball'
 
 class GameWindow < Gosu::Window
   def initialize
     super(960,640,false)
     self.caption = "Mazical"
-    @window = self
+    $window = self
+    load_images
 ###    @grid = Grid.new
-  @player = Ball.new(self, 20, 50)
-  @level
+    @level = Grid.new.test_grid####
+    @player = Ball.new(20, 50)#######
   end
   
-#  def button_down(id)
-#    @ball.go_left if id == Gosu::Button::KbLeft
-#    @ball.go_right if id == Gosu::Button::KbRight
-#    @ball.go_up if id == Gosu::Button::KbUp
-#    @ball.go_down if id == Gosu::Button::KbDown
-#  end
-  
+  def load_images
+    $images = {}
+    $images[:ball] = Gosu::Image.new($window, "images/ball.png")
+    $images[:left] = Gosu::Image.new($window, "images/leftwall.png")
+    $images[:right] = Gosu::Image.new($window, "images/rightwall.png")
+    $images[:top] = Gosu::Image.new($window, "images/topwall.png")
+    $images[:bottom] = Gosu::Image.new($window, "images/bottomwall.png")
+  end
+
   def update
     @player.go_left if button_down? Gosu::Button::KbLeft
     @player.go_right if button_down? Gosu::Button::KbRight
@@ -29,6 +33,7 @@ class GameWindow < Gosu::Window
   
   def draw
     @player.draw
+    @level.draw
   end
 end
 
