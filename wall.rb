@@ -1,11 +1,11 @@
 require 'gosu'
 
 module Visible
-  NO, YES, AFTER_HIT, RADIUS = (0..3).to_a
+  NO, YES, AFTER_HIT, RADIUS = *0..3
 end
 
 module Position
-  LEFT, RIGHT, TOP, BOTTOM = (0..3).to_a
+  LEFT, RIGHT, TOP, BOTTOM = *0..3
 end
 
 class Wall
