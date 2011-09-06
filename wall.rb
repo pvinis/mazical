@@ -1,10 +1,20 @@
 require 'gosu'
 
+module Visible
+  NO, YES, AFTER_HIT, RADIUS = (0..3).to_a
+end
+
+module Position
+  LEFT, RIGHT, TOP, BOTTOM = (0..3).to_a
+end
+
 class Wall
+  THICKNESS = 4
+
   def initialize(visibility, position)
     @v,@p = visibility,position
     @hit = false
-    @image = Gosu::Image.new($window, "images/" + case @p
+    @image = Gosu::Image.new($window, "images/" + case @p#########na kano load sto main oles tis eikones, kai na exo ena ref..
       when Position::LEFT
         "left"
       when Position::RIGHT
@@ -28,18 +38,4 @@ class Wall
   def visible?
     @v == Visible::YES
   end
-
-  def draw
-    if visible?
-      @image.draw(@x,@y,1,1,1,123)########
-    end
-  end
-end
-
-class Visibe
-  NO, YES, AFTER_HIT, RADIUS = (0..3).to_a
-end
-
-class Position
-  LEFT, RIGHT, TOP, BOTTOM = (0..3).to_a
 end
