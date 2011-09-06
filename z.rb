@@ -1,3 +1,3 @@
 module Z
-  Background, Grid = 1, 2
+  BACKGROUND, GRID = 1, 2
 end

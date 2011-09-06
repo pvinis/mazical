@@ -1,11 +1,11 @@
 require './tile'
+require './z'
 
 class Ball
   TILESIZE = Tile::SIZE
 
   def initialize(x, y)
-    @x,@y = x,y
-    @image = Gosu::Image.new($window, "images/ball.png")
+    @x,@y,@z = x,y,Z::GRID
   end
   
   # (0,0) is top left
@@ -27,6 +27,6 @@ class Ball
   end
 
   def draw
-    @image.draw(@x, @y, 0)
+    $images[:ball].draw(@x, @y, @z)
   end
 end
