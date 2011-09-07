@@ -21,6 +21,7 @@ class Tile
   end
   
   def draw
+    puts "d"
     @walls.each_pair do |p,w|
       w.image.draw(@x*SIZE+Xoffset[p], @y*SIZE+Yoffset[p], @z) if w.visible?
     end

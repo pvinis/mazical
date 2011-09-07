@@ -16,7 +16,7 @@ class GameWindow < Gosu::Window
     load_images
 ###    @grid = Grid.new
     @background = $images[:background]
-    @level = Grid.new.test_grid####
+    @level = Grid.new.empty_grid####
     @player = Ball.new(@level)#######
   end
   

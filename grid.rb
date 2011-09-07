@@ -27,13 +27,15 @@ class Grid
   
   def empty_grid #######
     @tiles = []
-    ($window_height/Tile::SIZE).times do |j|
+    (5).times do |j|
       line = []
-      ($window_width/Tile::SIZE).times do |i|
+      (5).times do |i|
         line << Tile.new(i, j, Visible::NO, Visible::NO, Visible::NO, Visible::NO)
       end
       @tiles << line
     end
+    @starting_x = 1
+    @starting_y = 0
     return self
   end
 
