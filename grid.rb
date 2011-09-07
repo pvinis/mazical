@@ -10,7 +10,7 @@ class Grid
     ###...
   end
   
-  def test_grid 
+  def test_grid ######
     @tiles = []
     line = []
     line << Tile.new(0, 0, Visible::ON_HIT, Visible::ON_HIT, Visible::ON_HIT, Visible::ON_HIT)
@@ -22,6 +22,18 @@ class Grid
     @tiles << line
     @starting_x = 1
     @starting_y = 0
+    return self
+  end
+  
+  def empty_grid #######
+    @tiles = []
+    ($window_height/Tile::SIZE).times do |j|
+      line = []
+      ($window_width/Tile::SIZE).times do |i|
+        line << Tile.new(i, j, Visible::NO, Visible::NO, Visible::NO, Visible::NO)
+      end
+      @tiles << line
+    end
     return self
   end
 
@@ -40,11 +52,24 @@ class Grid
   def move_down_from?(x,y)
     @tiles[y][x].walls[:bottom].pass_through?
   end
+
+  # editor methods
+  def toggle_wall_at(x,y,which)
+    @tiles[y][x].walls[which].toggle
+  end
       
   def draw
     @tiles.each do |line|
       line.each do |tile|
         tile.draw
+      end
+    end
+  end
+  
+  def draw!
+    @tiles.each do |line|
+      line.each do |tile|
+        tile.draw!
       end
     end
   end
