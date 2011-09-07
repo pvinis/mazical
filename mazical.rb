@@ -6,8 +6,11 @@ require './ball'
 require './z'
 
 class GameWindow < Gosu::Window
+  $window_width = 960
+  $window_height = 640
+
   def initialize
-    super(960,640,false)
+    super($window_width, $window_height,false)
     self.caption = "Mazical"
     $window = self
     load_images
@@ -31,6 +34,7 @@ class GameWindow < Gosu::Window
   end
   
   def button_down(id)
+    ###### kalitera etsi, i me case?
     @player.move_left if button_down? Gosu::Button::KbLeft
     @player.move_right if button_down? Gosu::Button::KbRight
     @player.move_up if button_down? Gosu::Button::KbUp
@@ -43,7 +47,3 @@ class GameWindow < Gosu::Window
     @player.draw
   end
 end
-
-
-# start game
-GameWindow.new.show
