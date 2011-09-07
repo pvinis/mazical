@@ -2,31 +2,33 @@ require './tile'
 require './z'
 
 class Ball
-  TILESIZE = Tile::SIZE
+  Xoffset = Wall::THICKNESS
+  Yoffset = Wall::THICKNESS
 
-  def initialize(x, y)
-    @x,@y,@z = x,y,Z::GRID
+  def initialize(level)
+    @level = level
+    @x,@y,@z = @level.starting_x,@level.starting_y,Z::GRID
   end
   
   # (0,0) is top left
   def go_left
-    ##TILESIZE.times { @x -= 1 }
-    @x -= TILESIZE
+    @x -= 1 if @level.tiles[@y][@x].walls[:left].pass_through?
   end
   
   def go_right
-    @x += TILESIZE
+    @x += 1 if @level.tiles[@y][@x].walls[:right].pass_through?
   end
   
   def go_up
-    @y -= TILESIZE
+    @y -= 1 if @level.tiles[@y][@x].walls[:top].pass_through?
   end
   
   def go_down
-    @y += TILESIZE
+    @y += 1 if @level.tiles[@y][@x].walls[:bottom].pass_through?
   end
 
   def draw
-    $images[:ball].draw(@x, @y, @z)
+    $images[:ball].draw(@x*Tile::SIZE+Xoffset, @y*Tile::SIZE+Yoffset, @z)
+    ####make it look like it slides, instead of jumping to the next tile
   end
 end
