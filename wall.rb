@@ -1,7 +1,7 @@
 require 'gosu'
 
 module Visible
-  NO, YES, AFTER_HIT, RADIUS = *0..3
+  NO, YES, ON_HIT, RADIUS = *0..3
 end
 
 module Position
@@ -9,11 +9,10 @@ module Position
 end
 
 class Wall
-  THICKNESS = 4
+  THICKNESS = 8
 
   def initialize(visibility, position)
     @v,@p = visibility,position
-    @hit = false
     @image = Gosu::Image.new($window, "images/" + case @p#########na kano load sto main oles tis eikones, kai na exo ena ref..
       when Position::LEFT
         "left"
@@ -26,15 +25,16 @@ class Wall
       end + "wall.png")
   end
   
-  def hit
-    @hit = true
-    @v = Visible::YES
+  def pass_through?
+    case @v
+    when Visible::NO
+      true
+    when Visible::YES,Visible::ON_HIT
+      @v = Visible::YES
+      false
+    end
   end
-  
-  def hit?
-    @hit
-  end
-  
+
   def visible?
     @v == Visible::YES
   end
