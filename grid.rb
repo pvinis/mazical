@@ -25,6 +25,22 @@ class Grid
     return self
   end
 
+  def go_left_from?(x,y)
+    @tiles[y][x].walls[:left].pass_through?
+  end
+
+  def go_right_from?(x,y)
+    @tiles[y][x].walls[:right].pass_through?
+  end
+
+  def go_up_from?(x,y)
+    @tiles[y][x].walls[:top].pass_through?
+  end
+
+  def go_down_from?(x,y)
+    @tiles[y][x].walls[:bottom].pass_through?
+  end
+      
   def draw
     @tiles.each do |line|
       line.each do |tile|

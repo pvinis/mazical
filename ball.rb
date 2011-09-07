@@ -12,19 +12,19 @@ class Ball
   
   # (0,0) is top left
   def go_left
-    @x -= 1 if @level.tiles[@y][@x].walls[:left].pass_through?
+    @x -= 1 if @level.go_left_from?(@x,@y)
   end
   
   def go_right
-    @x += 1 if @level.tiles[@y][@x].walls[:right].pass_through?
+    @x += 1 if @level.go_right_from?(@x,@y)
   end
   
   def go_up
-    @y -= 1 if @level.tiles[@y][@x].walls[:top].pass_through?
+    @y -= 1 if @level.go_up_from?(@x,@y)
   end
   
   def go_down
-    @y += 1 if @level.tiles[@y][@x].walls[:bottom].pass_through?
+    @y += 1 if @level.go_down_from?(@x,@y)
   end
 
   def draw
