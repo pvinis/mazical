@@ -2,12 +2,14 @@ require './wall'
 require './z'
 
 class Tile
-  SIZE = 24
+  SIZE = 48
   WALL_THICKNESS = Wall::THICKNESS
   Xoffset = Hash.new 0
-  Xoffset[:right] = 24-WALL_THICKNESS
+  Xoffset[:right] = SIZE-WALL_THICKNESS
   Yoffset = Hash.new 0
-  Yoffset[:bottom] = 24-WALL_THICKNESS
+  Yoffset[:bottom] = SIZE-WALL_THICKNESS
+  
+  attr_reader :walls
 
   def initialize(x, y, left, right, top,bottom)
     @x,@y,@z = x,y,Z::GRID
