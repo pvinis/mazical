@@ -11,20 +11,20 @@ class Ball
   end
   
   # (0,0) is top left
-  def go_left
-    @x -= 1 if @level.go_left_from?(@x,@y)
+  def move_left
+    @x -= 1 if @level.move_left_from?(@x,@y)
   end
   
-  def go_right
-    @x += 1 if @level.go_right_from?(@x,@y)
+  def move_right
+    @x += 1 if @level.move_right_from?(@x,@y)
   end
   
-  def go_up
-    @y -= 1 if @level.go_up_from?(@x,@y)
+  def move_up
+    @y -= 1 if @level.move_up_from?(@x,@y)
   end
   
-  def go_down
-    @y += 1 if @level.go_down_from?(@x,@y)
+  def move_down
+    @y += 1 if @level.move_down_from?(@x,@y)
   end
 
   def draw

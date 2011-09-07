@@ -31,10 +31,10 @@ class GameWindow < Gosu::Window
   end
   
   def button_down(id)
-    @player.go_left if button_down? Gosu::Button::KbLeft
-    @player.go_right if button_down? Gosu::Button::KbRight
-    @player.go_up if button_down? Gosu::Button::KbUp
-    @player.go_down if button_down? Gosu::Button::KbDown
+    @player.move_left if button_down? Gosu::Button::KbLeft
+    @player.move_right if button_down? Gosu::Button::KbRight
+    @player.move_up if button_down? Gosu::Button::KbUp
+    @player.move_down if button_down? Gosu::Button::KbDown
   end
   
   def draw
