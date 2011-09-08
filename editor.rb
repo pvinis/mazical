@@ -6,6 +6,7 @@ class EditorWindow < GameWindow
     super
     self.caption = "Editor"
     @level = Grid.new.empty_grid
+    @player = Ball.new(@level)
   end
   
   def button_down(id)
