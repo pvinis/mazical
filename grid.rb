@@ -25,16 +25,16 @@ class Grid
     return self
   end
   
-  def empty_grid #######
+  def empty_grid
     @tiles = []
     ($window_height/Tile::SIZE).times do |j|
       line = []
       ($window_width/Tile::SIZE).times do |i|
-        line << Tile.new(i, j, Visible::YES, Visible::ON_HIT, Visible::NO, Visible::NO)
+        line << Tile.new(i, j, Visible::NO, Visible::NO, Visible::NO, Visible::NO)
       end
       @tiles << line
     end
-    @starting_x = 1
+    @starting_x = 0
     @starting_y = 0
     return self
   end

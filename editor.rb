@@ -19,5 +19,7 @@ class EditorWindow < GameWindow
     @player.toggle_wall(:right) if button_down? Gosu::Button::KbD
     @player.toggle_wall(:top) if button_down? Gosu::Button::KbW
     @player.toggle_wall(:bottom) if button_down? Gosu::Button::KbS
+    @player.set_starting_position if button_down? Gosu::Button::KbQ
+    @player.set_finishing_position if button_down? Gosu::Button::KbE
   end
 end
