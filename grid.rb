@@ -27,9 +27,9 @@ class Grid
   
   def empty_grid #######
     @tiles = []
-    (2).times do |j|####### 19, oxi 5
+    ($window_height/Tile::SIZE).times do |j|
       line = []
-      (2).times do |i|
+      ($window_width/Tile::SIZE).times do |i|
         line << Tile.new(i, j, Visible::YES, Visible::ON_HIT, Visible::NO, Visible::NO)
       end
       @tiles << line

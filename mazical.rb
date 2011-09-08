@@ -5,11 +5,10 @@ class GameWindow < Gosu::Window
   $window_height = 640
 
   def initialize
-    super($window_width, $window_height,false)
-    self.caption = "Mazical"
+    super($window_width, $window_height, false)
     $window = self
+    self.caption = "Mazical"
     load_images
-    @background = $images[:background]
     @level = Grid.new.test_grid####
     @player = Ball.new(@level)
   end

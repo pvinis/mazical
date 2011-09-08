@@ -16,10 +16,10 @@ class Wall
   end
   
   def self.load_images
-    $images[:left] = Gosu::Image.load_tiles($window, "./images/leftwall.png", THICKNESS, Tile::SIZE, false)### na valo anti gia 8 kai 48 ta size kai thickness
-    $images[:right] = Gosu::Image.load_tiles($window, "./images/rightwall.png", THICKNESS, Tile::SIZE, false)### na valo anti gia 8 kai 48 ta size kai thickness
-    $images[:top] = Gosu::Image.load_tiles($window, "./images/topwall.png", Tile::SIZE, THICKNESS, false)### na valo anti gia 8 kai 48 ta size kai thickness
-    $images[:bottom] = Gosu::Image.load_tiles($window, "./images/bottomwall.png", Tile::SIZE, THICKNESS, false)### na valo anti gia 8 kai 48 ta size kai thickness
+    $images[:left] = Gosu::Image.load_tiles($window, "./images/leftwall.png", THICKNESS, Tile::SIZE, false)
+    $images[:right] = Gosu::Image.load_tiles($window, "./images/rightwall.png", THICKNESS, Tile::SIZE, false)
+    $images[:top] = Gosu::Image.load_tiles($window, "./images/topwall.png", Tile::SIZE, THICKNESS, false)
+    $images[:bottom] = Gosu::Image.load_tiles($window, "./images/bottomwall.png", Tile::SIZE, THICKNESS, false)
   end
 
   def pass_through?
@@ -44,7 +44,6 @@ class Wall
 
   # editor methods
   def toggle
-    puts @v
     @v = (@v + 1) % Visible::STATES
   end
 end
