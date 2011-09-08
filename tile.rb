@@ -1,35 +1,26 @@
-require './wall'
-require './z'
-
 class Tile
   SIZE = 48
-  WALL_THICKNESS = Wall::THICKNESS
-  Xoffset = Hash.new 0
-  Xoffset[:right] = SIZE-WALL_THICKNESS
-  Yoffset = Hash.new 0
-  Yoffset[:bottom] = SIZE-WALL_THICKNESS
-  
+
   attr_reader :walls
 
-  def initialize(x, y, left, right, top,bottom)
+  def initialize(x, y, vleft, vright, vtop, vbottom)
     @x,@y,@z = x,y,Z::GRID
+
     @walls = {}
-    @walls[:left] = Wall.new(left, :left) ### mporo na to kano me to index? (:left, klp)
-    @walls[:right] = Wall.new(right, :right)
-    @walls[:top] = Wall.new(top, :top)
-    @walls[:bottom] = Wall.new(bottom, :bottom)
+    @walls[:left] = Wall.new(@x, @y, vleft, :left) ### mporo na to kano me to index? (:left, klp)
+    @walls[:right] = Wall.new(@x, @y, vright, :right)
+    @walls[:top] = Wall.new(@x, @y, vtop, :top)
+    @walls[:bottom] = Wall.new(@x, @y, vbottom, :bottom)
   end
-  
+
   def draw
-    puts "d"
     @walls.each_pair do |p,w|
-      w.image.draw(@x*SIZE+Xoffset[p], @y*SIZE+Yoffset[p], @z) if w.visible?
+      w.draw
     end
   end
 
-  def draw!
-    @walls.each_pair do |p,w|
-      w.image.draw(@x*SIZE+Xoffset[p], @y*SIZE+Yoffset[p], @z)
-    end
+  # editor methods
+  def toggle_wall(which)
+    @walls[which].toggle
   end
 end

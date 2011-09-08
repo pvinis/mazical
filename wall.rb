@@ -1,59 +1,50 @@
-require 'gosu'
-
 module Visible
   NO, YES, ON_HIT, STATES = *0..3
-  ####RADIUS
-  def self.to_s(v)
-    case v
-    when NO
-      "no"
-    when YES
-      "yes"
-    when ON_HIT
-      "onhit"
-    end
-  end
 end
 
 class Wall
   THICKNESS = 8
-  
-  attr_reader :image
+  Xoffset = Hash.new 0
+  Xoffset[:right] = Tile::SIZE - THICKNESS
+  Yoffset = Hash.new 0
+  Yoffset[:bottom] = Tile::SIZE - THICKNESS
 
-  def initialize(visibility, position)
+  def initialize(x, y, visibility, position)
+    @x,@y,@z = x,y,Z::GRID
     @v,@p = visibility,position
-    select_image
+    @sprite = $images[@p]
   end
   
+  def self.load_images
+    $images[:left] = Gosu::Image.load_tiles($window, "./images/leftwall.png", THICKNESS, Tile::SIZE, false)### na valo anti gia 8 kai 48 ta size kai thickness
+    $images[:right] = Gosu::Image.load_tiles($window, "./images/rightwall.png", THICKNESS, Tile::SIZE, false)### na valo anti gia 8 kai 48 ta size kai thickness
+    $images[:top] = Gosu::Image.load_tiles($window, "./images/topwall.png", Tile::SIZE, THICKNESS, false)### na valo anti gia 8 kai 48 ta size kai thickness
+    $images[:bottom] = Gosu::Image.load_tiles($window, "./images/bottomwall.png", Tile::SIZE, THICKNESS, false)### na valo anti gia 8 kai 48 ta size kai thickness
+  end
+
   def pass_through?
     case @v
     when Visible::NO
       true
-    when Visible::YES,Visible::ON_HIT
+    when Visible::YES, Visible::ON_HIT
       @v = Visible::YES
       false
     end
   end
 
-  # editor methods
-  def toggle
-    @v = (@v + 1) % Visible::STATES
-    select_image
+  def visible?
+    @v == Visible::YES
   end
-  
-  def select_image
-    if $editor and !visible?
-      @image = $images[(@p.to_s+"_"+Visible.to_s(@v)).to_sym]
-      puts "1"
-      puts (@p.to_s+"_"+Visible.to_s(@v)).to_sym
-    else
-      @image = $images[@p]
-      puts "2"
-      puts @p
+
+  def draw
+    if $editor or visible?
+      @sprite[@v].draw(@x*Tile::SIZE+Xoffset[@p], @y*Tile::SIZE+Yoffset[@p], @z)
     end
   end
 
-  def visible?
-    @v == Visible::YES
+  # editor methods
+  def toggle
+    puts @v
+    @v = (@v + 1) % Visible::STATES
   end
 end

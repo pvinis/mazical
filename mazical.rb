@@ -1,10 +1,5 @@
 # Mazical
 
-require 'gosu'
-require './grid'
-require './ball'
-require './z'
-
 class GameWindow < Gosu::Window
   $window_width = 960
   $window_height = 640
@@ -14,25 +9,18 @@ class GameWindow < Gosu::Window
     self.caption = "Mazical"
     $window = self
     load_images
-###    @grid = Grid.new
     @background = $images[:background]
-    @level = Grid.new.empty_grid####
-    @player = Ball.new(@level)#######
+    @level = Grid.new.test_grid####
+    @player = Ball.new(@level)
   end
   
   def load_images
     $images = {}
-    $images[:ball] = Gosu::Image.new($window, "./images/ball.png")
-    $images[:left] = Gosu::Image.new($window, "./images/leftwall.png")
-    $images[:right] = Gosu::Image.new($window, "./images/rightwall.png")
-    $images[:top] = Gosu::Image.new($window, "./images/topwall.png")
-    $images[:bottom] = Gosu::Image.new($window, "./images/bottomwall.png")
     $images[:background] = Gosu::Image.new($window, "./images/whitebackground.png")
+    Wall.load_images
+    Ball.load_images
   end
 
-  def update
-  end
-  
   def button_down(id)
     ###### kalitera etsi, i me case?
     @player.move_left if button_down? Gosu::Button::KbLeft

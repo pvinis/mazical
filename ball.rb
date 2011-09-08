@@ -1,15 +1,15 @@
-require './tile'
-require './z'
-
 class Ball
-  Xoffset = Wall::THICKNESS
-  Yoffset = Wall::THICKNESS
+  Offset = Wall::THICKNESS
 
   def initialize(level)
     @level = level
     @x,@y,@z = @level.starting_x,@level.starting_y,Z::GRID
   end
   
+  def self.load_images
+    $images[:ball] = Gosu::Image.new($window, "./images/ball.png")
+  end
+
   # (0,0) is top left
   def move_left
     @x -= 1 if @level.move_left_from?(@x,@y)
@@ -25,6 +25,11 @@ class Ball
   
   def move_down
     @y += 1 if @level.move_down_from?(@x,@y)
+  end
+
+  def draw
+    $images[:ball].draw(@x*Tile::SIZE+Offset, @y*Tile::SIZE+Offset, @z)
+    ####make it look like it slides, instead of jumping to the next tile
   end
 
   # editor methods
@@ -46,10 +51,5 @@ class Ball
   
   def toggle_wall(which)
     @level.toggle_wall_at(@x,@y,which)
-  end
-
-  def draw
-    $images[:ball].draw(@x*Tile::SIZE+Xoffset, @y*Tile::SIZE+Yoffset, @z)
-    ####make it look like it slides, instead of jumping to the next tile
   end
 end

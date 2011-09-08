@@ -1,10 +1,10 @@
-require './tile'
-
 class Grid
   attr_reader :starting_x, :starting_y, :tiles
 
   def initialize()
     @tiles = []
+    @starting_x = 1
+    @starting_y = 0
     ##read_level
     ##create tiles
     ###...
@@ -27,10 +27,10 @@ class Grid
   
   def empty_grid #######
     @tiles = []
-    (5).times do |j|
+    (2).times do |j|####### 19, oxi 5
       line = []
-      (5).times do |i|
-        line << Tile.new(i, j, Visible::NO, Visible::NO, Visible::NO, Visible::NO)
+      (2).times do |i|
+        line << Tile.new(i, j, Visible::YES, Visible::ON_HIT, Visible::NO, Visible::NO)
       end
       @tiles << line
     end
@@ -55,11 +55,6 @@ class Grid
     @tiles[y][x].walls[:bottom].pass_through?
   end
 
-  # editor methods
-  def toggle_wall_at(x,y,which)
-    @tiles[y][x].walls[which].toggle
-  end
-      
   def draw
     @tiles.each do |line|
       line.each do |tile|
@@ -67,12 +62,9 @@ class Grid
       end
     end
   end
-  
-  def draw!
-    @tiles.each do |line|
-      line.each do |tile|
-        tile.draw!
-      end
-    end
+
+  # editor methods
+  def toggle_wall_at(x,y,which)
+    @tiles[y][x].toggle_wall(which)
   end
 end
