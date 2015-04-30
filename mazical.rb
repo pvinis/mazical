@@ -15,7 +15,8 @@ class GameWindow < Gosu::Window
   
   def load_images
     $images = {}
-    $images[:background] = Gosu::Image.new($window, "./images/whitebackground.png")
+    $images[:white_background] = Gosu::Image.new($window, "./images/whitebackground.png")
+    $images[:dark_background] = Gosu::Image.new($window, "./images/darkbackground.png")
     Wall.load_images
     Ball.load_images
   end
