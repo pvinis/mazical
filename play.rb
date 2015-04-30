@@ -14,4 +14,4 @@ require './editor'
 
 
 GameWindow.new.show
-#EditorWindow.new.show
+# EditorWindow.new.show
