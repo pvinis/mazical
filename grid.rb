@@ -1,5 +1,6 @@
 class Grid
   attr_reader :starting_x, :starting_y, :tiles
+  attr_reader :line
 
   def initialize()
     @tiles = []
@@ -10,20 +11,41 @@ class Grid
     ###...
   end
   
-  def test_grid ######
+  def test_grid
     @tiles = []
-    line = []
-    line << Tile.new(0, 0, Visible::ON_HIT, Visible::ON_HIT, Visible::ON_HIT, Visible::ON_HIT)
-    line << Tile.new(1, 0, Visible::ON_HIT, Visible::ON_HIT, Visible::YES, Visible::NO)
+    @line = []
+    puts "2"
+    @line << Tile.new(self, 0, 0, Visible::YES, Visible::ON_HIT, Visible::YES, Visible::ON_PASS_UP)
+    puts "3"
+    @line << Tile.new(self, 1, 0, nil, Visible::ON_HIT, Visible::NO, Visible::YES)
+    puts "31"
+    @line << Tile.new(self, 2, 0, nil, Visible::ON_HIT, Visible::ON_HIT, Visible::NO)
+    puts "4"
     @tiles << line
-    line = []
-    line << Tile.new(0, 1, Visible::ON_HIT, Visible::NO, Visible::NO, Visible::ON_HIT)
-    line << Tile.new(1, 1, Visible::NO, Visible::ON_HIT, Visible::NO, Visible::ON_HIT)
+    @line = []
+    @line << Tile.new(self, 0, 1, Visible::ON_HIT, Visible::NO, nil, Visible::YES)
+    @line << Tile.new(self, 1, 1, nil, Visible::NO, nil, Visible::YES)
+    @line << Tile.new(self, 2, 1, nil, Visible::NO, nil, Visible::YES)
     @tiles << line
-    @starting_x = 1
+    @starting_x = 2
     @starting_y = 0
     return self
   end
+
+#  def test_grid ######
+#    @tiles = []
+#    line = []
+#    line << Tile.new(0, 0, Visible::ON_HIT, Visible::ON_HIT, Visible::ON_HIT, Visible::ON_HIT)
+#    line << Tile.new(1, 0, Visible::ON_HIT, Visible::ON_HIT, Visible::YES, Visible::NO)
+#    @tiles << line
+#    line = []
+#    line << Tile.new(0, 1, Visible::ON_HIT, Visible::NO, Visible::NO, Visible::ON_HIT)
+#    line << Tile.new(1, 1, Visible::NO, Visible::ON_HIT, Visible::NO, Visible::ON_HIT)
+#    @tiles << line
+#    @starting_x = 1
+#    @starting_y = 0
+#    return self
+#  end
   
   def empty_grid
     @tiles = []
@@ -58,7 +80,7 @@ class Grid
   def draw
     @tiles.each do |line|
       line.each do |tile|
-        tile.draw
+        #tile.draw
       end
     end
   end
